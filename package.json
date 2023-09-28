@@ -1,0 +1,25 @@
+{
+  "name": "typescript-code-generator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx webpack",
+    "watch": "npx webpack --watch"
+  },
+  "author": "Riccardo Ratta",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mustache": "^4.2.3",
+    "@types/url-parse": "^1.4.9",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "json-to-ts": "^1.7.0",
+    "mustache": "^4.2.0",
+    "superjson": "^1.13.3",
+    "url-parse": "^1.5.10"
+  }
+}

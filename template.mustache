@@ -1,0 +1,57 @@
+## `{{request.method}} {{{url.pathname}}}`
+
+— {{{request.name}}}
+
+{{request.description}}
+
+{{#bodyOrUrlParamsExists}}
+### Request
+
+{{#urlParamsExists}}
+
+URL parameters:
+
+{{#urlParams}}
+- `{{key}}`: {{value}}
+{{/urlParams}}
+{{/urlParamsExists}}
+
+{{#bodyExists}}
+
+#### Body
+
+{{#isBodyTypescript}}
+```typescript
+{{{body}}}
+```
+{{/isBodyTypescript}}
+{{^isBodyTypescript}}
+```
+{{{body}}}
+```
+{{/isBodyTypescript}}
+
+{{/bodyExists}}
+
+{{/bodyOrUrlParamsExists}}
+
+### Response
+
+Status code: `200`.
+
+{{#responseBodyExists}}
+{{#isResponseBodyTypescript}}
+```typescript
+{{{responseBody}}}
+```
+{{/isResponseBodyTypescript}}
+{{^isResponseBodyTypescript}}
+```
+{{{responseBody}}}
+```
+{{/isResponseBodyTypescript}}
+{{/responseBodyExists}}
+
+{{#errorCodesExists}}
+Other error codes: {{{errorCodes}}}.
+{{/errorCodesExists}}
