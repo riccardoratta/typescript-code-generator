@@ -1,8 +1,8 @@
-## `{{request.method}} {{{url.pathname}}}`
+## `{{request.method}} {{{url}}}`
 
 — {{{request.name}}}
 
-{{request.description}}
+{{{request.description}}}
 
 {{#bodyOrUrlParamsExists}}
 ### Request
@@ -40,6 +40,8 @@ URL parameters:
 Status code: `200`.
 
 {{#responseBodyExists}}
+#### Body
+
 {{#isResponseBodyTypescript}}
 ```typescript
 {{{responseBody}}}

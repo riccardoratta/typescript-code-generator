@@ -11,7 +11,28 @@ const Mustache = require("mustache");
 
 class MyCodeGenerator {
   public generate(context: Context, request: Request): string {
-    console.log(Console.stringifyWithCyclicSupport(request));
+    //console.log(Console.stringifyWithCyclicSupport(request));
+    //console.log(Console.stringifyWithCyclicSupport(context));
+
+    const urlParts: string[] = [];
+
+    for (const component of (request.getUrlBase(true) as DynamicString)
+      .components) {
+      if (typeof component !== "string") {
+        urlParts.push(
+          ":" +
+            // @ts-ignore
+            context.getEnvironmentVariableById(component.environmentVariable)
+              .name
+        );
+      } else {
+        urlParts.push(component);
+      }
+    }
+
+    const url = urlParts.join("").replace(":baseUrl", "/api");
+
+    console.log("URL", url);
 
     let body: string = undefined;
     let isBodyTypescript = true;
@@ -30,8 +51,6 @@ class MyCodeGenerator {
         isBodyTypescript = false;
       }
     }
-
-    console.log("BODY", body, body !== undefined);
 
     const urlParams = Object.entries(request.urlParameters).map(
       ([key, value]) => ({
@@ -91,7 +110,7 @@ class MyCodeGenerator {
     return Mustache.render(readFile("template.mustache"), {
       context,
       request,
-      url: new Url(request.urlBase),
+      url,
       urlParams,
       urlParamsExists: urlParams.length !== 0,
       body,
