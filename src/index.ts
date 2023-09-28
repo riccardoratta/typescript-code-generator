@@ -53,7 +53,7 @@ class MyCodeGenerator {
     const urlParams = Object.entries(request.urlParameters).map(
       ([key, value]) => ({
         key,
-        value,
+        value: isNumeric(value as string) ? "number" : "string",
       })
     );
 
@@ -129,3 +129,7 @@ class MyCodeGenerator {
 
 // @ts-ignore
 registerCodeGenerator(MyCodeGenerator);
+
+function isNumeric(value: string) {
+  return /^[+-]?\d+(\.\d+)?$/.test(value);
+}
