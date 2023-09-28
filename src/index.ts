@@ -32,8 +32,6 @@ class MyCodeGenerator {
 
     const url = urlParts.join("").replace(":baseUrl", "/api");
 
-    console.log("URL", url);
-
     let body: string = undefined;
     let isBodyTypescript = true;
 
